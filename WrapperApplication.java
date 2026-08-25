@@ -41,16 +41,12 @@ public class WrapperApplication{
             Double netSalaryObj = basicSalaryObj + bonusObj - taxDeductionObj;
 
             // 5. Displaying Payroll Summary
-            System.out.println("\n==========================================");
-            System.out.println("             PAYROLL RECEIPT              ");
-            System.out.println("==========================================");
+            
             System.out.println("Employee ID     : " + empIdObj);
             System.out.println("Basic Salary    : ₹" + String.format("%.2f", basicSalaryObj));
             System.out.println("Bonus Amount    : ₹" + String.format("%.2f", bonusObj));
             System.out.println("Tax Deduction   : ₹" + String.format("%.2f", taxDeductionObj) + " (10%)");
-            System.out.println("------------------------------------------");
             System.out.println("Net Salary      : ₹" + String.format("%.2f", netSalaryObj));
-            System.out.println("==========================================");
         }
 
         scanner.close();

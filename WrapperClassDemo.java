@@ -4,18 +4,18 @@ public class WrapperClassDemo {
         int x = 45;
         double y = 98.6;
 
-        Integer wrappedInt = x; 
-        Double wrappedDouble = y;
+        Integer int1 = x; 
+        Double double1 = y;
 
-        System.out.println("Autoboxed Integer Object : " + wrappedInt);
-        System.out.println("Autoboxed Double Object  : " + wrappedDouble);
+        System.out.println("Autoboxed Integer Object : " + int1);
+        System.out.println("Autoboxed Double Object  : " + double1);
 
 
-        int unboxedInt = wrappedInt;
-        double unboxedDouble = wrappedDouble;
+        int Int2 = int1;
+        double double2 = double1;
 
-        System.out.println("Unboxed int primitive    : " + unboxedInt);
-        System.out.println("Unboxed double primitive : " + unboxedDouble);
+        System.out.println("Unboxed int primitive    : " + Int2);
+        System.out.println("Unboxed double primitive : " + double2);
 
         
         
@@ -47,8 +47,8 @@ public class WrapperClassDemo {
 
         
         Integer score = 100;
-        double scoreAsDouble = score.doubleValue(); 
-        byte scoreAsByte = score.byteValue();       
+        Double scoreAsDouble = score.doubleValue(); 
+        Byte scoreAsByte = score.byteValue();       
 
         System.out.println("Integer value  : " + score);
         System.out.println("As doubleValue : " + scoreAsDouble);
