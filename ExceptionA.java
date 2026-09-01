@@ -19,7 +19,7 @@ public class ExceptionA {
             System.out.println("Caught in multi-catch block:");
             System.out.println("Error: " + e.getMessage());
             System.out.println("Type : " + e.getClass().getSimpleName() + " occurred");
-        } catch (Exception e) {
+        } catch (java.lang.Exception e) {
             System.out.println("Some other error occurred");
         } finally {
             System.out.println("Inside finally");
