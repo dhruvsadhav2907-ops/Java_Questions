@@ -1,0 +1,72 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%
+    request.setCharacterEncoding("UTF-8");
+    String action = request.getParameter("action");
+
+    String dbUrl = "jdbc:mysql://localhost:3306/company_db?useSSL=false&serverTimezone=UTC";
+    String dbUser = "root";
+    String dbPass = "root"; // Update with your MySQL password
+
+    if (action != null) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPass)) {
+
+                // 1. CREATE (Insert Employee)
+                if ("insert".equalsIgnoreCase(action)) {
+                    String name = request.getParameter("name");
+                    String email = request.getParameter("email");
+                    String designation = request.getParameter("designation");
+                    double salary = Double.parseDouble(request.getParameter("salary"));
+
+                    String sql = "INSERT INTO employees (name, email, designation, salary) VALUES (?, ?, ?, ?)";
+                    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                        ps.setString(1, name);
+                        ps.setString(2, email);
+                        ps.setString(3, designation);
+                        ps.setDouble(4, salary);
+                        ps.executeUpdate();
+                    }
+                }
+
+                // 2. UPDATE (Modify Employee)
+                else if ("update".equalsIgnoreCase(action)) {
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    String name = request.getParameter("name");
+                    String email = request.getParameter("email");
+                    String designation = request.getParameter("designation");
+                    double salary = Double.parseDouble(request.getParameter("salary"));
+
+                    String sql = "UPDATE employees SET name = ?, email = ?, designation = ?, salary = ? WHERE emp_id = ?";
+                    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                        ps.setString(1, name);
+                        ps.setString(2, email);
+                        ps.setString(3, designation);
+                        ps.setDouble(4, salary);
+                        ps.setInt(5, id);
+                        ps.executeUpdate();
+                    }
+                }
+
+                // 3. DELETE (Remove Employee)
+                else if ("delete".equalsIgnoreCase(action)) {
+                    int id = Integer.parseInt(request.getParameter("id"));
+
+                    String sql = "DELETE FROM employees WHERE emp_id = ?";
+                    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                        ps.setInt(1, id);
+                        ps.executeUpdate();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            out.println("<h3 style='color:red;'>Operation Error: " + e.getMessage() + "</h3>");
+            out.println("<a href='index.jsp'>Back to Main Directory</a>");
+            return;
+        }
+    }
+
+    // Redirect to refreshed index page
+    response.sendRedirect("index.jsp");
+%>
